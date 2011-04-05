@@ -3,7 +3,8 @@ package info.salzsee.haw.prp2;
 import jgame.*;
 import jgame.platform.*;
 
-public class Simulator  extends StdGame {
+@SuppressWarnings("serial")
+public class Simulator extends JGEngine {
 	private JGPoint size;
 
 	public Simulator(JGPoint size) {
