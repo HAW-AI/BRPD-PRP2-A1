@@ -20,7 +20,7 @@ public class Particle
 		forces = new ArrayList<Double>();
 		speed = 0.0;
 		setMass(1000.0);
-		setX(0.0);
+		setPosition(0.0);
 		setTexture(texture);
 	}
 	
