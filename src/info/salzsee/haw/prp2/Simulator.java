@@ -24,11 +24,15 @@ public class Simulator extends JGEngine {
 		// setFrameRate(fps,maxFrameSkip
 		setFrameRate(45,1);
 		
-		new Particle(10.0);
+		addObject(new Particle(10.0));
 	}
 	
 	public void doFrame() {
 		moveObjects();
+	}
+	
+	public void addObject(Simulatable object) {
+		new JGObjectWrapper(object);
 	}
 	
 }

@@ -9,16 +9,21 @@ import jgame.JGObject;
  * - bewegen sich, weil Kräfte auf sie einwirken
  * - können (aber müssen nicht !) eigene Antriebskräfte entwickeln (z.B. bei angetriebenen Fahrzeugen)
  */
-public class Particle extends JGObject 
+public class Particle
 	implements MassAfflicted, ForceAfflicted, SpeedAfflicted, Acceleratable, Simulatable {
 	
 	public Particle() {
-		// JGObject (String name,boolean unique_id,double x,double y,int collisionid,String gfxname
-		super("Particle", false, 0,0, 1, "ball");
+		this("ball");
+	}
+	
+	public Particle(String texture) {
 		forces = new ArrayList<Double>();
 		speed = 0.0;
-		setMass(500.0);
+		setMass(1000.0);
+		setX(0.0);
+		setTexture(texture);
 	}
+	
 	public Particle(Double force) {
 		this();
 		addForce(force);
@@ -63,6 +68,7 @@ public class Particle extends JGObject
 	}
 
 	private Double speed;
+	
 	@Override
 	public Double getSpeed(Double time) {
 		speed += (getAcceleration() * time);
@@ -71,11 +77,32 @@ public class Particle extends JGObject
 
 	@Override
 	public Double getPosition() {
-		return this.getLastX();
+		return this.getX();
+	}
+	
+	private String texture;
+	
+	public void setTexture(String texture) {
+		this.texture = texture;
 	}
 	
 	@Override
-	public void move() {
-		x = x + getSpeed(gamespeed) * gamespeed;
+	public String getTexture() {
+		return texture;
+	}
+	
+	private Double x;
+	
+	public void setX(Double x) {
+		this.x = x;
+	}
+	
+	public Double getX() {
+		return x;
+	}
+
+	@Override
+	public void move(Double time) {
+		x = x + getSpeed(time) * time;
 	}
 }
