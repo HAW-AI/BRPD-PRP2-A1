@@ -98,7 +98,7 @@ public class Particle
 	}
 
 	@Override
-	public void move(Double time) {
+	public void simulate(Double time) {
 		setPosition(getPosition() + getSpeed(time) * time);
 	}
 }

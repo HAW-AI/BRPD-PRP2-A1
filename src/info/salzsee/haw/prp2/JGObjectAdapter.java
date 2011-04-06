@@ -13,7 +13,7 @@ public class JGObjectAdapter extends JGObject {
 	
 	@Override
 	public void move() {
-		object.move(gamespeed);
+		object.simulate(gamespeed);
 		this.setPos(object.getPosition(), 0);
 	}
 }
