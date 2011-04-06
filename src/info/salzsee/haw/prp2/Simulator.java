@@ -32,7 +32,7 @@ public class Simulator extends JGEngine {
 	}
 	
 	public void addObject(Simulatable object) {
-		new JGObjectWrapper(object);
+		new JGObjectAdapter(object);
 	}
 	
 }
