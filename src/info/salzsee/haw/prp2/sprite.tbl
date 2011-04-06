@@ -1,3 +1,9 @@
+# SpriteCheetName, Bild, xOffset, yOffset, SpriteW, SpriteH, SkipX, SkipY 
 sprite		sprite.gif		0	0	16	16	0	0
 
-ball			ball	1	sprite	0		-
+# SpriteName, Alias, ?, SpriteCheetName, ?, Flags 
+ball0			bal0	1	sprite	0	-
+ball1			bal1	1	sprite	1	-
+
+# AniName, Frames, Speed
+ball	ball0;ball1	2
