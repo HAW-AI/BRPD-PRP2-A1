@@ -4,5 +4,4 @@ public interface Simulatable {
 	public void move(Double time);
 	public Double getPosition(); 
 	public String getTexture();
-	public Double getX();
 }

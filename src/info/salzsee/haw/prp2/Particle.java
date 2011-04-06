@@ -75,9 +75,15 @@ public class Particle
 		return speed;
 	}
 
+	private Double position;
+	
 	@Override
 	public Double getPosition() {
-		return this.getX();
+		return position;
+	}
+	
+	public void setPosition(Double position) {
+		this.position = position;
 	}
 	
 	private String texture;
@@ -90,19 +96,9 @@ public class Particle
 	public String getTexture() {
 		return texture;
 	}
-	
-	private Double x;
-	
-	public void setX(Double x) {
-		this.x = x;
-	}
-	
-	public Double getX() {
-		return x;
-	}
 
 	@Override
 	public void move(Double time) {
-		x = x + getSpeed(time) * time;
+		setPosition(getPosition() + getSpeed(time) * time);
 	}
 }

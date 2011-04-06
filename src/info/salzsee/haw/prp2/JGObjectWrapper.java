@@ -14,6 +14,6 @@ public class JGObjectWrapper extends JGObject {
 	@Override
 	public void move() {
 		object.move(gamespeed);
-		this.setPos(object.getX(), 0);
+		this.setPos(object.getPosition(), 0);
 	}
 }
