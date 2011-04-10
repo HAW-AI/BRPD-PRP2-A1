@@ -1,8 +1,14 @@
-package info.salzsee.haw.prp2;
+package de.hawhamburg.informatik.ai.prp2;
+
 
 import java.util.ArrayList;
 
-import jgame.JGObject;
+import de.hawhamburg.informatik.ai.prp2.interfaces.Acceleratable;
+import de.hawhamburg.informatik.ai.prp2.interfaces.ForceAfflicted;
+import de.hawhamburg.informatik.ai.prp2.interfaces.MassAfflicted;
+import de.hawhamburg.informatik.ai.prp2.interfaces.Simulatable;
+import de.hawhamburg.informatik.ai.prp2.interfaces.SpeedAfflicted;
+
 /*
  * Partikel
  * - bewegen sich kontinuierlich
@@ -68,6 +74,12 @@ public class Particle extends JGObject
 		speed += (getAcceleration() * time);
 		return speed;
 	}
+	
+	public Double getSpeed() {
+		return speed;
+	}
+	
+	public void paint() {}
 
 	@Override
 	public Double getPosition() {
