@@ -3,6 +3,7 @@ package de.hawhamburg.informatik.ai.prp2;
 
 import java.util.ArrayList;
 
+import de.hawhamburg.informatik.ai.prp2.interfaces.Paintable;
 import de.hawhamburg.informatik.ai.prp2.interfaces.Simulatable;
 import jgame.*;
 import jgame.platform.*;
@@ -10,12 +11,12 @@ import jgame.platform.*;
 @SuppressWarnings("serial")
 public class Simulator extends JGEngine {
 	private JGPoint size;
-	private ArrayList<Simulatable> hud;
+	private ArrayList<Paintable> hud;
 
 	public Simulator(JGPoint size) {
 		this.size = size;
 		initEngine(size.x,size.y);
-		this.hud = new ArrayList<Simulatable>();
+		this.hud = new ArrayList<Paintable>();
 	}
 	
 	@Override
@@ -48,8 +49,8 @@ public class Simulator extends JGEngine {
 	 * @see jgame.platform.JGEngine#paintFrame()
 	 */
 	public void paintFrame() {
-		for(Simulatable simulatable : hud) {
-			simulatable.paint();
+		for(Paintable paintable : hud) {
+			paintable.paint();
 		}
 	}
 	
