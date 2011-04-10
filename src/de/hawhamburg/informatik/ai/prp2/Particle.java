@@ -15,16 +15,15 @@ import de.hawhamburg.informatik.ai.prp2.interfaces.SpeedAfflicted;
  * - bewegen sich, weil Kräfte auf sie einwirken
  * - können (aber müssen nicht !) eigene Antriebskräfte entwickeln (z.B. bei angetriebenen Fahrzeugen)
  */
-public class Particle extends JGObject 
+public class Particle 
 	implements MassAfflicted, ForceAfflicted, SpeedAfflicted, Acceleratable, Simulatable {
 	
 	public Particle() {
-		// JGObject (String name,boolean unique_id,double x,double y,int collisionid,String gfxname
-		super("Particle", false, 0,0, 1, "ball");
 		forces = new ArrayList<Double>();
 		speed = 0.0;
 		setMass(500.0);
 	}
+	
 	public Particle(Double force) {
 		this();
 		addForce(force);
@@ -79,15 +78,20 @@ public class Particle extends JGObject
 		return speed;
 	}
 	
-	public void paint() {}
-
+	private Double position = 0.0;
+	
 	@Override
 	public Double getPosition() {
-		return this.getLastX();
+		return position;
 	}
 	
 	@Override
-	public void move() {
-		x = x + getSpeed(gamespeed) * gamespeed;
+	public void simulate(Double time) {
+		position = position + getSpeed(time) * time;
+	}
+
+	@Override
+	public String getTexture() {
+		return "ball";
 	}
 }
