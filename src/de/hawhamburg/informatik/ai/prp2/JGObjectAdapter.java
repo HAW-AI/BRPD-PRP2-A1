@@ -20,10 +20,6 @@ public class JGObjectAdapter extends JGObject {
 		this.setPos(object.getPosition() % engine.getDimension().x, 0);
 	}
 	
-	public void paint() {
-		object.paint();
-	}
-	
 	public Double getSpeed() {
 		return object.getSpeed();
 	}
