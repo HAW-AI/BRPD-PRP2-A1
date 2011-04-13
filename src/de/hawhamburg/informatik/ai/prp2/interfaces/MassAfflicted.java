@@ -1,4 +1,4 @@
-package info.salzsee.haw.prp2;
+package de.hawhamburg.informatik.ai.prp2.interfaces;
 
 public interface MassAfflicted {
 	public void setMass(Double mass);
