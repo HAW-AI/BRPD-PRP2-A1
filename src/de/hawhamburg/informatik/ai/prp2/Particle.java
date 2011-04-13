@@ -19,44 +19,20 @@ public class Particle
 	implements MassAfflicted, ForceAfflicted, SpeedAfflicted, Acceleratable, Simulatable {
 	
 	public Particle() {
-		forces = new ArrayList<Double>();
+		setLevel(1.0);
+		setMass(1445.0);
+		setPowerMax(456.0 * 1000);
+		setSpeedMax(330.0 / 3.6);
 		speed = 0.0;
-		setMass(500.0);
 	}
 	
-	public Particle(Double force) {
-		this();
-		addForce(force);
-	}
-	
-	private ArrayList<Double> forces;
-	
-	@Override
-	public void addForce(Double force) {
-		forces.add(force);
-	}
-	
-	@Override
-	public void clearForce() {
-		forces.clear();
-	}
-
-	@Override
-	public Double getForce() {
-		Double accu = 0.0;
-		for (Double force: forces) {
-			accu += force;
-		}
-		return accu;
-	}
-
 	private Double mass;
 	
 	@Override
 	public void setMass(Double mass) {
 		this.mass = mass;
 	}
-
+ 
 	@Override
 	public Double getMass() {
 		return mass;
@@ -68,6 +44,7 @@ public class Particle
 	}
 
 	private Double speed;
+	
 	@Override
 	public Double getSpeed(Double time) {
 		speed += (getAcceleration() * time);
@@ -93,5 +70,67 @@ public class Particle
 	@Override
 	public String getTexture() {
 		return "ball";
+	}
+	
+	private Double level;
+	
+	public Double getLevel() {
+		return level;
+	}
+	
+	public void setLevel(Double level) {
+		this.level = level;
+	}
+	
+	public Double powerMax;
+	
+	public Double getPowerMax() {
+		return powerMax;
+	}
+	
+	public void setPowerMax(Double powerMax) {
+		this.powerMax = powerMax;
+	}
+	
+	public Double getPower() {
+		return getLevel() * getPowerMax();
+	}
+	
+	public Double getPropulsionMax() {
+		return getMass() * getEarthAcceleration(); 
+	}
+
+	private Double getEarthAcceleration() {
+		return 9.81;
+	}
+	
+	public Double getPorpulsionAbsolute() {
+		return Math.min(getPropulsionMax(), getPower() / getSpeed());
+	}
+	
+	public Double getPorpulsion() {
+		return getPorpulsionAbsolute() * getLevel();
+	}
+	
+	private Double speedMax;
+
+	public Double getSpeedMax() {
+		return speedMax;
+	}
+
+	public void setSpeedMax(Double speedMax) {
+		this.speedMax = speedMax;
+	}
+	
+	public Double getDragConstant() {
+		return Math.abs(getPropulsionMax() / Math.pow(getSpeedMax(),3));
+	}
+	
+	public Double getDragForce() {
+		return getDragConstant() * Math.pow(getSpeed(),2) * -getSpeed();
+	}
+	
+	public Double getForce() {
+		return getPorpulsion() + getDragForce();
 	}
 }

@@ -13,6 +13,7 @@ public class Speedometer implements Paintable {
 	}
 
 	public void paint() {
-		engine.drawString(object.getSpeed().toString(), engine.getDimension().x - 20, engine.getDimension().y -20, 1);
+		Double speed = object.getSpeed() * 3.6;
+		engine.drawString(speed.toString(), engine.getDimension().x - 20, engine.getDimension().y -20, 1);
 	}
 }

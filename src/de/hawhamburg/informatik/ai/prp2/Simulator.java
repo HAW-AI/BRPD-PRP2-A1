@@ -22,7 +22,7 @@ public class Simulator extends JGEngine {
 	@Override
 	public void initCanvas() {
 		// setCanvasSettings(TilesX,TilesY,TileW,TileH,FGColor,BGColor,MsgFont)
-		setCanvasSettings(size.x/16,size.y/16,16,16,null,JGColor.blue, new JGFont("Arial", JGFont.PLAIN, 12));
+		setCanvasSettings(size.x/16,size.y/16,16,16,null,null, new JGFont("Arial", JGFont.PLAIN, 12));
 	}
 
 	@Override
@@ -31,13 +31,13 @@ public class Simulator extends JGEngine {
 		// setFrameRate(fps,maxFrameSkip)
 		setFrameRate(60,1);
 		
-		Particle p = new Particle(10.0);
+		Particle p = new Particle();
 		addObject(p);
 		hud.add(new Speedometer(this, p));
 	}
 	
 	/*
-	 * Do anything needed to be done befor this frame gets rendered
+	 * Do anything needed to be done before this frame gets rendered
 	 * @see jgame.platform.JGEngine#doFrame()
 	 */
 	public void doFrame() {
