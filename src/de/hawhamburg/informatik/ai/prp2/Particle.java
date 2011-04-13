@@ -1,8 +1,5 @@
 package de.hawhamburg.informatik.ai.prp2;
 
-
-import java.util.ArrayList;
-
 import de.hawhamburg.informatik.ai.prp2.interfaces.Acceleratable;
 import de.hawhamburg.informatik.ai.prp2.interfaces.ForceAfflicted;
 import de.hawhamburg.informatik.ai.prp2.interfaces.MassAfflicted;
