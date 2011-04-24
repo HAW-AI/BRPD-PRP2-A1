@@ -1,9 +1,11 @@
 package de.hawhamburg.informatik.ai.prp2;
 
+import de.hawhamburg.informatik.ai.prp2.interfaces.Controlable;
+import de.hawhamburg.informatik.ai.prp2.interfaces.LevelAfflicted;
 import de.hawhamburg.informatik.ai.prp2.interfaces.Simulatable;
 import jgame.JGObject;
 
-public class JGObjectAdapter extends JGObject {
+public class JGObjectAdapter extends JGObject implements Controlable {
 	private Simulatable object;
 	private Simulator engine;
 	
@@ -18,9 +20,38 @@ public class JGObjectAdapter extends JGObject {
 	public void move() {
 		object.simulate(gamespeed);
 		this.setPos(object.getPosition() % engine.getDimension().x, 0);
+		
+		System.out.println(object.getSpeed() + " <-> " + ((LevelAfflicted) object).getLevel());
 	}
 	
 	public Double getSpeed() {
 		return object.getSpeed();
+	}
+
+	@Override
+	public void onKeyDown() {
+		if (object instanceof LevelAfflicted) {
+			System.out.println("LevelAfflicted onKeyDown");
+			((LevelAfflicted) object).decreaseLeveL();
+		}
+	}
+
+	@Override
+	public void onKeyUp() {
+		if (object instanceof LevelAfflicted) {
+			System.out.println("LevelAfflicted onKeyUp");
+			((LevelAfflicted) object).increaseLevel();
+		}
+	}
+
+	@Override
+	public void onKeyLeft() {
+		// NOTE not needed right now
+	}
+
+	@Override
+	public void onKeyRight() {
+		// NOTE not needed right now
+		
 	}
 }
