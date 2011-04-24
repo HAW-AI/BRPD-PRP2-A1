@@ -3,6 +3,7 @@ package de.hawhamburg.informatik.ai.prp2;
 
 import java.util.ArrayList;
 
+import de.hawhamburg.informatik.ai.prp2.interfaces.Controlable;
 import de.hawhamburg.informatik.ai.prp2.interfaces.Paintable;
 import de.hawhamburg.informatik.ai.prp2.interfaces.Simulatable;
 import jgame.*;
@@ -12,11 +13,13 @@ import jgame.platform.*;
 public class Simulator extends JGEngine {
 	private JGPoint size;
 	private ArrayList<Paintable> hud;
+	private ArrayList<Controlable> controlable;
 
 	public Simulator(JGPoint size) {
 		this.size = size;
 		initEngine(size.x,size.y);
 		this.hud = new ArrayList<Paintable>();
+		this.controlable = new ArrayList<Controlable>();
 	}
 	
 	@Override
@@ -41,6 +44,13 @@ public class Simulator extends JGEngine {
 	 * @see jgame.platform.JGEngine#doFrame()
 	 */
 	public void doFrame() {
+		for(Controlable c : controlable) {
+			if (getKey(KeyDown)) { c.onKeyDown(); }
+			if (getKey(KeyUp)) { c.onKeyUp(); }
+			if (getKey(KeyLeft)) { c.onKeyLeft(); }
+			if (getKey(KeyRight)) { c.onKeyRight(); }
+		}
+
 		moveObjects();
 	}
 	
@@ -55,7 +65,7 @@ public class Simulator extends JGEngine {
 	}
 	
 	public void addObject(Simulatable object) {
-		new JGObjectAdapter(this, object);
+		this.controlable.add(new JGObjectAdapter(this, object));
 	}
 	
 	public JGPoint getDimension() {
