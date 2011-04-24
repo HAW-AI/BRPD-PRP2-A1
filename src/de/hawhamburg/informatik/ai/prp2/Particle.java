@@ -2,6 +2,7 @@ package de.hawhamburg.informatik.ai.prp2;
 
 import de.hawhamburg.informatik.ai.prp2.interfaces.Acceleratable;
 import de.hawhamburg.informatik.ai.prp2.interfaces.ForceAfflicted;
+import de.hawhamburg.informatik.ai.prp2.interfaces.LevelAfflicted;
 import de.hawhamburg.informatik.ai.prp2.interfaces.MassAfflicted;
 import de.hawhamburg.informatik.ai.prp2.interfaces.Simulatable;
 import de.hawhamburg.informatik.ai.prp2.interfaces.SpeedAfflicted;
@@ -13,10 +14,14 @@ import de.hawhamburg.informatik.ai.prp2.interfaces.SpeedAfflicted;
  * - können (aber müssen nicht !) eigene Antriebskräfte entwickeln (z.B. bei angetriebenen Fahrzeugen)
  */
 public class Particle 
-	implements MassAfflicted, ForceAfflicted, SpeedAfflicted, Acceleratable, Simulatable {
+	implements MassAfflicted, ForceAfflicted, SpeedAfflicted, Acceleratable, Simulatable, LevelAfflicted {
+	
+	public final Double levelStep = 0.001;
+	public final Double levelMax = 1.0;
+	public final Double levelMin = -1.0;
 	
 	public Particle() {
-		setLevel(1.0);
+		setLevel(0.0001);
 		setMass(1445.0);
 		setPowerMax(456.0 * 1000);
 		setSpeedMax(330.0 / 3.6);
@@ -76,7 +81,15 @@ public class Particle
 	}
 	
 	public void setLevel(Double level) {
-		this.level = level;
+		if (level >= levelMin && level <= levelMax) {
+			this.level = level;
+		}
+		else {
+			this.level = level < 0 ? levelMin : levelMax;
+		}
+		if (level == 0.0) {
+			level = levelStep; // ugly usage of levelStep
+		}
 	}
 	
 	public Double powerMax;
@@ -88,7 +101,7 @@ public class Particle
 	public void setPowerMax(Double powerMax) {
 		this.powerMax = powerMax;
 	}
-	
+
 	public Double getPower() {
 		return getLevel() * getPowerMax();
 	}
@@ -120,7 +133,7 @@ public class Particle
 	}
 	
 	public Double getDragConstant() {
-		return Math.abs(getPropulsionMax() / Math.pow(getSpeedMax(),3));
+		return getPropulsionMax() / Math.pow(getSpeedMax(),3);
 	}
 	
 	public Double getDragForce() {
@@ -129,5 +142,15 @@ public class Particle
 	
 	public Double getForce() {
 		return getPorpulsion() + getDragForce();
+	}
+
+	@Override
+	public void increaseLevel() {
+		setLevel(getLevel() + levelStep);
+	}
+
+	@Override
+	public void decreaseLeveL() {
+		setLevel(getLevel() - levelStep);
 	}
 }
